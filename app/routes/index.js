@@ -1,5 +1,13 @@
-module.exports = function(application){
-	application.get('/', function(req, res){
-		res.send('Bem vindo a sua app NodeJS!');
+
+module.exports = function(app){
+	
+	app.get('/', function(req, res){
+
+		app.app.controllers.caixaController.carregarCaixa(app, req, res);
 	});
+
+	app.put('/salvarsangria', function(req, res){
+
+		app.app.controllers.sangprovController.salvarSangria(app, req, res);
+	})
 }
