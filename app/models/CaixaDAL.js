@@ -7,19 +7,21 @@ CaixaDAL.prototype.getCaixa = function(){
 
     this._connection.query("SELECT * from caixa", (err, res) => {
         this._connection.end();
-        console.log(res.rows)
+        return res.rows
     });
 }
 
 
-CaixaDAL.prototype.atualizarSaldo = async function(caixa_id, saldoNovo, res, callback){
+CaixaDAL.prototype.atualizarSaldo = function(caixa_id, saldoNovo){
 
-    const { rows } = await this._connection.query(
-        "update caixa set caixa_valorfinal = $1 where caixa_id = $2",     
-        [saldoNovo, caixa_id]
-    )
+    this._connection.query("update caixa set caixa_valorfinal = $1 where caixa_id = $2", 
+        [saldoNovo, caixa_id],
+        
+        (err, res) => {
+        this._connection.end();
+        return err || res.rows 
+    });
 
-    callback(rows)
 }
 
 
