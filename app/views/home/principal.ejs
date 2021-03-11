@@ -1,10 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head></head>
+<head>
+    <title>Sangria & Provento</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="img" href="../../img/money.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 
-<body>
-    <h1>olá</h1>
+<body style="background: linear-gradient(to right, rgb(83, 105, 118), rgb(41, 46, 73));">
+    <div class="container">
+        <h2>Formulário</h2>
+        <form class="form-horizontal">
+            <div class=" form-group ">
+
+                <div class="form-group ">
+                    <label class="control-label col-sm-2 " for="number ">Valor:</label>
+                    <div class="col-sm-5 ">
+                        <input type="number " class="form-control " id="valor " placeholder="Insira o valor ">
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <label class="control-label col-sm-2 " for="number ">Tipo:</label>
+                    <div class="col-sm-5 ">
+                        <div class="dropdown ">
+                            <button class="btn btn-default dropdown-toggle form-control " type="button " data-toggle="dropdown ">
+                                Tipo
+                                <span class="caret "></span>
+                            </button>
+                            <ul class="dropdown-menu ">
+                                <li><a href="# ">Provento</a></li>
+                                <li><a href="# ">Sangria</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <label class="control-label col-sm-2 " for="comment ">Motivo:</label>
+                    <div class="col-sm-5 ">
+                        <textarea class="form-control " rows="5 " id="comment "></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="col-sm-offset-2 col-sm-5 ">
+                        <button type="submit " class="btn btn-default ">Enviar</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
