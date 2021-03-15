@@ -1,14 +1,27 @@
 function CaixaDAL(connection){
 
 	this._connection = connection;
+  
 }
 
-CaixaDAL.prototype.getCaixa = function(){
+CaixaDAL.prototype.getCaixa = async function () {
 
-    this._connection.query("SELECT * from caixa", (err, res) => {
-        this._connection.end();
-        return res.rows
-    });
+    const client = await this._connection.connect()
+    try {
+        const res = await client.query('select * from caixa')
+        return res.rows[0]
+    } 
+    catch(err){
+        err => console.log(err.stack)
+    }
+    finally {
+        // Make sure to release the client before any error handling,
+        // just in case the error handling itself throws an error.
+        client.release()
+    }
+    
+
+
 }
 
 
