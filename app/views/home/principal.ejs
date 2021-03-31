@@ -14,7 +14,15 @@
 
 <body style="background: linear-gradient(to right, rgb(83, 105, 118), rgb(41, 46, 73));">
     
-    
+    <% if(validacao) {%>
+        <ul>
+            <% for(let i = 0; i < validacao.length; i++){ %>
+                <li>
+                    <%= validacao[i].msg%>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
     
     <div class="container">
         <h2>Formulário</h2>
@@ -37,7 +45,7 @@
                 <div class="form-group ">
                     <label class="control-label col-sm-2 " for="number ">Tipo:</label>
                     <div class="col-sm-5 ">
-                        <select id="tipo" class="custom-select bg-secondary text-white form-control" required>
+                        <select id="tipo" name="tipo" class="custom-select bg-secondary text-white form-control" required>
                             <option selected>Tipo</option>
                             <option value="1" selected>Provento</option>
                             <option value="2">Sangria</option>

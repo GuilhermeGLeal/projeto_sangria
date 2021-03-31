@@ -4,7 +4,6 @@ module.exports = function(app){
 	
 	app.get('/', function(req, res){
 
-		
 		app.app.controllers.caixaController.carregarCaixa(app, req, res);
 	});
 
