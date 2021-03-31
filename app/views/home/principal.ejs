@@ -14,8 +14,6 @@
 
 <body style="background: linear-gradient(to right, rgb(83, 105, 118), rgb(41, 46, 73));">
     
-    
-    
     <div class="container">
         <h2>Formulário</h2>
         <form class="form-horizontal" action="/salvarsangria" METHOD="POST">
@@ -74,39 +72,26 @@
                 <div class="form-group">
                     <% if(validacao) {%>
                         <% for(let i = 0; i < validacao.length; i++){ %>
-                            <li>
+                            <div class="alert alert-warning alert-dismissible fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <%= validacao[i].msg%>
-                            </li>
+                            </div>
                         <% } %>
                     <% } %>
-                    <!-- <div class="alert alert-warning alert-dismissible">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
-                    </div> -->
                 </div>
-
-                <!-- <% if(validacao) {%>
-                    <ul>
-                        <% for(let i = 0; i < validacao.length; i++){ %>
-                            <li>
-                                <%= validacao[i].msg%>
-                            </li>
-                        <% } %>
-                    </ul>
-                <% } %> -->
-
             </div>
         </form>
     </div>
 </body>
 <script>
     function onlyNumber(evt) {
-          
-          // Only ASCII charactar in that range allowed
-          var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-          if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-              return false;
-          return true;
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
+            if(ASCIICode === 46) 
+                return true;
+            return false;
+        }
+        return true;
       }
 </script>
 <script type="text/javascript" src="../../utils/validators.js"></script>
