@@ -5,6 +5,7 @@
     <title>Sangria & Provento</title>
     <meta charset="utf-8">
     <link rel="icon" type="img" href="../../img/money.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -23,20 +24,22 @@
                         <input type="number " class="form-control " id="valor " placeholder="Insira o valor ">
                     </div>
                 </div>
-               <input type="hidden" value="<%= caixa.caixa_id%>" id="caixa_id">
+                <input type="hidden" value="<%= caixa.caixa_id%>" id="caixa_id">
                 <div class="form-group ">
                     <label class="control-label col-sm-2 " for="number ">Tipo:</label>
                     <div class="col-sm-5 ">
-                        <div class="dropdown ">
-                            <button class="btn btn-default dropdown-toggle form-control " type="button " data-toggle="dropdown ">
-                                Tipo
-                                <span class="caret "></span>
-                            </button>
-                            <ul class="dropdown-menu ">
-                                <li><a href="# ">Provento</a></li>
-                                <li><a href="# ">Sangria</a></li>
+                        
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle form-control" type="button"
+                                data-toggle="dropdown">Tipo
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Provento</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Sangria</a></li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
 
