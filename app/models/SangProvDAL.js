@@ -19,6 +19,17 @@ SangProvDAL.prototype.insert = async function(body){
     
   
 }
+SangProvDAL.prototype.MaxPK = async function(){
+
+    const client = await this._connection.connect()
+    try {
+        const res = await client.query("select max(sangriaprov_id) from sangria_provento")
+        return res.rows[0]
+    } 
+    catch(err){
+        err => console.log(err.stack)
+    }
+}
 
 module.exports = function(){
 	return SangProvDAL;
