@@ -5,12 +5,19 @@ module.exports.salvarSangria = async function (app, req, res) {
 	let form = req.body
 	let saldo_novo = 0;
 	
-	console.log(form)
+		
 	const connection = app.config.dbConnection();
 	const caixaDAL = new app.app.models.CaixaDAL(connection)
-	const movCaixaDAL = new app.app.models.MovCaixaDAL(connection)
-	const SangProvDAL = new app.app.models.SangProvDAL(connection)
+	
 
+	if(form.caixa_fechamento){
+		
+		const caixaAtual = await caixaDAL.getCaixa();
+
+		res.render("home/principal", { validacao: [{msg: 'ERRO: O caixa está fechando, nenhuma operação é possivel!!'}], caixa: caixaAtual})
+		return "";
+	}
+	
 	const erros = validationResult(req)
 
 	if (!erros.isEmpty()) {
@@ -43,17 +50,15 @@ module.exports.salvarSangria = async function (app, req, res) {
 		saldo_novo = valorTela + valorCaixa
 	}
 		
+	const movCaixaDAL = new app.app.models.MovCaixaDAL(connection)
+	const SangProvDAL = new app.app.models.SangProvDAL(connection)
+	let retorno = await SangProvDAL.insert(form)
+	let sangprov = await SangProvDAL.MaxPK()
+	retorno = await movCaixaDAL.insert(form.caixa_id, sangprov.max)	
+	retorno = await caixaDAL.atualizarSaldo(form.caixa_id, saldo_novo)
 	
-	SangProvDAL.insert(form)
-	let sangprov = SangProvDAL.MaxPK()
-	console.log(sangprov)
-	//movCaixaDAL.insert(form.caixa_id, sangprov)
-	//caixaDAL.atualizarSaldo(form.caixa_id, saldo_novo)
-	//const caixaAtual = await caixaDAL.getCaixa();
+	res.redirect('/')
+
+
 	
-	res.render("home/principal", { validacao: {}, caixa: caixaAtual})
-
-
-
-
 }

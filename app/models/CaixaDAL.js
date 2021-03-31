@@ -27,14 +27,18 @@ CaixaDAL.prototype.getCaixa = async function () {
 
 CaixaDAL.prototype.atualizarSaldo = async function(caixa_id, saldoNovo){
 
+    let saldocorreto = parseFloat(saldoNovo)
+    let caixacorreto = parseInt(caixa_id)
     const client = await this._connection.connect()
     try {
-        const res = await client.query("update caixa set caixa_valorfinal = $1 where caixa_id = $2", 
-        [saldoNovo, caixa_id])
-        return res.rows[0]
+
+        let sql = "update caixa set caixa_valorfinal = $1 where caixa_id = $2";
+        let values = [saldocorreto, caixacorreto];
+        const res = await client.query(sql,values)
+        return res.rows
     } 
     catch(err){
-        err => console.log(err.stack)
+        return err
     }
     finally {
         // Make sure to release the client before any error handling,

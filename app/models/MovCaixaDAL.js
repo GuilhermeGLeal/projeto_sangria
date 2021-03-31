@@ -5,16 +5,22 @@ function MovCaixaDAL(connection){
 
 MovCaixaDAL.prototype.insert = async function(caixaid, sangprovid){
    
+    let id_caixa = parseInt(caixaid)
+    let sangria = parseInt(sangprovid)
+    
+    
     const client = await this._connection.connect()
     try {
-        const res = await client.query("INSERT INTO mov_caixa (caixa_id, sangriaprov_id) VALUES ($1, $2)", 
-        [caixaid, sangprovid])
-        return res.rows[0]
+        let sql = "INSERT INTO mov_caixa(caixa_id, sangriaprov_id) VALUES($1, $2)"
+        let values =  [id_caixa, sangria]
+        const res = await client.query(sql, values)
+        return res.rows
     } 
     catch(err){
-        err => console.log(err.stack)
+        return err
     }
-   
+    
+  
    
 }
 

@@ -8,7 +8,7 @@ module.exports = function(app){
 	});
 
 	app.post('/salvarsangria',[
-		check('caixa_fechamento', 'ERRO: caixa está fechado!!').not().isDate(),
+	
 		check('valor','ERRO: valor não pode ser vazio!').notEmpty(),
     	check('motivo', 'ERRO: motivo não pode ser vazio!' ).notEmpty(),
   	  check('motivo','ERRO: motivo deve estar entre 10 e 150 caracteres').isLength(10, 150),

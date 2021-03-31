@@ -6,16 +6,22 @@ function SangProvDAL(connection){
 SangProvDAL.prototype.insert = async function(body){
 
     const { valor, tipo, motivo } = body;
+    let valorcorreto = parseFloat(valor)
+    let tipocorreto = parseInt(tipo)
+
     const client = await this._connection.connect()
     try {
-        const res = await client.query("INSERT INTO sangria_provento (sangriaprov_tipo, sangriaprov_valor, sangriaprov_motivo) "+
-        +"VALUES ($1, $2, $3)", 
-        [tipo, valor, motivo])
-        return res.rows[0]
+       
+        let sql = "INSERT INTO sangria_provento (sangriaprov_tipo, sangriaprov_valor, sangriaprov_motivo) VALUES ($1, $2, $3)"
+        let values = [tipocorreto, valorcorreto , motivo]
+        const res = await client.query(sql, values)
+        return res.rows
     } 
     catch(err){
-        err => console.log(err.stack)
+       
+        return err
     }
+    
     
   
 }
@@ -27,8 +33,9 @@ SangProvDAL.prototype.MaxPK = async function(){
         return res.rows[0]
     } 
     catch(err){
-        err => console.log(err.stack)
+        return err
     }
+    
 }
 
 module.exports = function(){
