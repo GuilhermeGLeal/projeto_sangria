@@ -8,11 +8,11 @@ module.exports = function(app){
 	});
 
 	app.post('/salvarsangria',[
-		check('caixa_fechamento', 'caixa está fechado!!').not().isDate(),
-		check('valor','valor não pode ser vazio!').notEmpty(),
-    	check('motivo', 'motivo não pode ser vazio!' ).notEmpty(),
-  	  check('motivo','motivo deve estar entre 10 e 150 caracteres').isLength(10, 150),
-    	check('valor', 'valor deve ser um número decimal e positivo!!').matches(/^\d+(\.\d{1,2})?$/)
+		check('caixa_fechamento', 'ERRO: caixa está fechado!!').not().isDate(),
+		check('valor','ERRO: valor não pode ser vazio!').notEmpty(),
+    	check('motivo', 'ERRO: motivo não pode ser vazio!' ).notEmpty(),
+  	  check('motivo','ERRO: motivo deve estar entre 10 e 150 caracteres').isLength(10, 150),
+    	check('valor', 'ERRO: valor deve ser um número decimal e positivo!!').matches(/^\d+(\.\d{1,2})?$/)
 	  ], function(req, res){
 
 		app.app.controllers.sangprovController.salvarSangria(app, req, res);
