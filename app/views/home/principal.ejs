@@ -13,6 +13,17 @@
 </head>
 
 <body style="background: linear-gradient(to right, rgb(83, 105, 118), rgb(41, 46, 73));">
+    
+    <% if(validacao) {%>
+        <ul>
+            <% for(let i = 0; i < validacao.length; i++){ %>
+                <li>
+                    <%= validacao[i].msg%>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+    
     <div class="container">
         <h2>Formulário</h2>
         <form class="form-horizontal" action="/salvarsangria" METHOD="POST">
@@ -21,7 +32,7 @@
                 <div class="form-group ">
                     <label class="control-label col-sm-2 " for="number ">Valor:</label>
                     <div class="col-sm-5 ">
-                        <input type="number " class="form-control " id="valor " placeholder="Insira o valor ">
+                        <input type="number " class="form-control " id="valor" placeholder="Insira o valor " name="valor">
                     </div>
                 </div>
                 <input type="hidden" value="<%= caixa.caixa_id%>" id="caixa_id">
@@ -39,7 +50,7 @@
                 <div class="form-group ">
                     <label class="control-label col-sm-2 " for="comment ">Motivo:</label>
                     <div class="col-sm-5 ">
-                        <textarea class="form-control " rows="5 " id="comment "></textarea>
+                        <textarea class="form-control " rows="5 " id="comment " name="motivo"></textarea>
                     </div>
                 </div>
 
