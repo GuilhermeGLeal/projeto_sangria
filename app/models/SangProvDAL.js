@@ -3,18 +3,20 @@ function SangProvDAL(connection){
 	this._connection = connection;
 }
 
-SangProvDAL.prototype.insert = function(body){
+SangProvDAL.prototype.insert = async function(body){
 
     const { valor, tipo, motivo } = body;
-    this._connection.query("INSERT INTO sangria_provento (sangriaprov_tipo, sangriaprov_valor, sangriaprov_motivo) "+
+    const client = await this._connection.connect()
+    try {
+        const res = await client.query("INSERT INTO sangria_provento (sangriaprov_tipo, sangriaprov_valor, sangriaprov_motivo) "+
         +"VALUES ($1, $2, $3)", 
-        [tipo, valor, motivo],
-        
-        (err, res) => {
-        this._connection.end();
-         return err || res.rows 
-    }); 
-  
+        [tipo, valor, motivo])
+        return res.rows[0]
+    } 
+    catch(err){
+        err => console.log(err.stack)
+    }
+    
   
 }
 
