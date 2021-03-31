@@ -5,5 +5,5 @@ module.exports.carregarCaixa = async function(app, req, res) {
     const caixaAtual = await caixaDAL.getCaixa();
    
   
-    res.render('home/principal', {caixa: caixaAtual, validacao: {}})
+    res.render('home/principal', {validacao: {}, caixa: caixaAtual})
 }

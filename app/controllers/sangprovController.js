@@ -1,18 +1,30 @@
-module.exports.salvarSangria = function(app, req ,res){
+const { validationResult } = require("express-validator");
 
-    let form = req.body
+module.exports.salvarSangria = async function (app, req, res) {
 
-    req.assert("valor", "valor não pode ser vazio!!").notEmpty();
-    req.assert("motivo", "motivo não pode ser vazio!!").notEmpty();
-    req.assert("motivo", "motivo deve conter entre 10 e 150 caracteres").len(10, 150)
+	let form = req.body
+	const connection = app.config.dbConnection();
+	const caixaDAL = new app.app.models.CaixaDAL(connection)
+	//const movCaixaDAL = new app.app.models.MovCaixaDAL(connection)
+	//const SangProvDAL = new app.app.models.SangProvDAL(connection)
 
-    const erros = req.validationErrors();
+	const erros = validationResult(req)
 
-	if(erros){
+	if (!erros.isEmpty()) {
 
-		res.render("home/principal", {validacao: erros, caixa: {}})
+		
+		const caixaAtual = await caixaDAL.getCaixa();
+
+		res.render("home/principal", { validacao: erros.errors, caixa: caixaAtual})
 		return "";
 	}
-     res.redirect('/')
-    
+
+	// cria sangria/provento
+	// cria movimento
+	// atualiza o caixa
+	// depois pega o novo caixa
+	res.redirect('/')
+
+
+
 }

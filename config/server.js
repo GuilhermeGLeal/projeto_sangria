@@ -1,6 +1,5 @@
 let express = require('express');
 const consign = require('consign');
-//const expressValidator = require('express-validator')
 let app = express();
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
@@ -9,7 +8,7 @@ app.set('views', './app/views');
 app.use(express.static('./app/public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
-//app.use(expressValidator())
+
 
 
 consign()
