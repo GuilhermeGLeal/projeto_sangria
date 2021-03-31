@@ -14,15 +14,7 @@
 
 <body style="background: linear-gradient(to right, rgb(83, 105, 118), rgb(41, 46, 73));">
     
-    <% if(validacao) {%>
-        <ul>
-            <% for(let i = 0; i < validacao.length; i++){ %>
-                <li>
-                    <%= validacao[i].msg%>
-                </li>
-            <% } %>
-        </ul>
-    <% } %>
+    
     
     <div class="container">
         <h2>Formulário</h2>
@@ -37,16 +29,18 @@
                                 id="valor" 
                                 placeholder="Insira o valor " 
                                 name="valor"
-                                onkeypress="return isNumber(event)">
+                                maxlength="10"
+                                onkeypress="return onlyNumber(event)">
                     </div>
                 </div>
+
                 <input type="hidden" value="<%= caixa.caixa_id%>" id="caixa_id" name="caixa_id">
                 <input type="hidden" value="<%= caixa.caixa_fechamento%>" id="caixa_fechamento" name="caixa_fechamento">
+
                 <div class="form-group ">
                     <label class="control-label col-sm-2 " for="number ">Tipo:</label>
                     <div class="col-sm-5 ">
                         <select id="tipo" name="tipo" class="custom-select bg-secondary text-white form-control" required>
-                            <option selected>Tipo</option>
                             <option value="1" selected>Provento</option>
                             <option value="2">Sangria</option>
                         </select>
@@ -56,7 +50,12 @@
                 <div class="form-group ">
                     <label class="control-label col-sm-2 " for="comment ">Motivo:</label>
                     <div class="col-sm-5 ">
-                        <textarea class="form-control " rows="5 " id="comment " name="motivo"></textarea>
+                        <textarea   class="form-control " 
+                                    rows="5 " 
+                                    id="comment " 
+                                    name="motivo"
+                                    minlength="10"
+                                    maxlength="150"></textarea>
                     </div>
                 </div>
 
@@ -66,11 +65,44 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <% if(validacao) {%>
+                        <% for(let i = 0; i < validacao.length; i++){ %>
+                            <li>
+                                <%= validacao[i].msg%>
+                            </li>
+                        <% } %>
+                    <% } %>
+                    <!-- <div class="alert alert-warning alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
+                    </div> -->
+                </div>
+
+                <!-- <% if(validacao) {%>
+                    <ul>
+                        <% for(let i = 0; i < validacao.length; i++){ %>
+                            <li>
+                                <%= validacao[i].msg%>
+                            </li>
+                        <% } %>
+                    </ul>
+                <% } %> -->
+
             </div>
         </form>
     </div>
-
-    <script type="text/javascript" src="../../utils/validators.js"></script>
 </body>
+<script>
+    function onlyNumber(evt) {
+          
+          // Only ASCII charactar in that range allowed
+          var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+          if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+              return false;
+          return true;
+      }
+</script>
+<script type="text/javascript" src="../../utils/validators.js"></script>
 
 </html>
