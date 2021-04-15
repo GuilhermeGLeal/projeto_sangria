@@ -1,0 +1,7 @@
+Caixa Aberto;Saldo Caixa;Valor;Tipo;Motivo;Resultado
+VERDADEIRO;13000,5;1000;Sangria;Conta de água;Sucesso
+VERDADEIRO;10000;500000,05;Provento;Novo sócio;Sucesso
+FALSO;540000,99;10,6;Sangria;Coxinha;Falha
+VERDADEIRO;545000,87;740000;Sangria;Novo galpão;Falha
+VERDADEIRO;479000,34;1000;Provento;-;Falha
+VERDADEIRO;480000,12;-;Provento;Venda extra;Falha

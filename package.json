@@ -14,5 +14,8 @@
     "express": "^4.16.0",
     "express-validator": "^6.10.0",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "cypress": "^7.1.0"
   }
 }
