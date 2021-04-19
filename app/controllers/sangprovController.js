@@ -1,5 +1,15 @@
 const { validationResult } = require("express-validator");
 
+module.exports.carregarCaixa = async function(app, req, res) {
+
+    const connection = app.config.dbConnection();
+    const caixaDAL = new app.app.models.CaixaDAL(connection)
+    const caixaAtual = await caixaDAL.getCaixa();
+    
+  
+    res.render('home/principal', {validacao: {}, caixa: caixaAtual})
+}
+
 module.exports.salvarSangria = async function (app, req, res) {
 
 	let form = req.body
@@ -14,7 +24,7 @@ module.exports.salvarSangria = async function (app, req, res) {
 		
 		const caixaAtual = await caixaDAL.getCaixa();
 
-		res.render("home/principal", { validacao: [{msg: 'ERRO: O caixa está fechando, nenhuma operação é possivel!!'}], caixa: caixaAtual})
+		res.render("home/principal", { validacao: [{msg: 'ERRO: O caixa está fechado, nenhuma operação é possivel!!'}], caixa: caixaAtual})
 		return "";
 	}
 	
@@ -58,7 +68,4 @@ module.exports.salvarSangria = async function (app, req, res) {
 	retorno = await caixaDAL.atualizarSaldo(form.caixa_id, saldo_novo)
 	
 	res.redirect('/')
-
-
-	
 }

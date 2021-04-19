@@ -4,7 +4,7 @@ module.exports = function(app){
 	
 	app.get('/', function(req, res){
 
-		app.app.controllers.caixaController.carregarCaixa(app, req, res);
+		app.app.controllers.sangprovController.carregarCaixa(app, req, res);
 	});
 
 	app.post('/salvarsangria',[

@@ -14,11 +14,19 @@
 //     })
 // })
 
+// cypress/integration/spec.js
+
 beforeEach(()=> cy.visit('/'))
 
-describe('Caixa aberto',()=>{
-    it('Verificar se o caixa está aberto',()=>{
-        
-        cy.get('input[name=valor]')
+describe('Teste',()=>{
+    it('',()=>{
+        cy.fixture('teste').as('testeCSV')
+
+        // caixa aberto
+        cy.get('input[name=caixa_fechamento]').should("have.value", "")
+
+        // sangria
+        cy.get('input[name=caixa_valorfinal]')
+        expect(1500).to.be.greaterThan(0)
     })
 })
