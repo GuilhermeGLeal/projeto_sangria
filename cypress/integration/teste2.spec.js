@@ -1,30 +1,4 @@
-// get vai buscar qualquer componente com determinado name
-// enquanto contains vai buscar  em tela
-
-// describe('Caixa aberto',()=>{
-//     it('Verificar se o caixa está aberto',()=>{
-//         cy.visit('http://localhost:1024')
-//         cy.contains('Sangria')
-//     })
-// })
-
 beforeEach(()=> cy.visit('/'))
-
-// describe('Login to OrangeHRM website', function () {
-//     before(function () {
-//         cy.visit('https://opensource-demo.orangehrmlive.com/')
-//         cy.fixture('testdata').then(function (testdata) {
-//             this.testdata = testdata
-//         })
-//     })
-
-//     it('Validate successful Login', function () {
-//         cy.get('#txtUsername').type(this.testdata.username)
-//         cy.get('#txtPassword').type(this.testdata.password)
-//         cy.get('#btnLogin').click()
-//         cy.get('#welcome').contains(this.testdata.welcomeText)
-//     })
-// })
 
 // cypress test using fixtures
 
@@ -67,6 +41,30 @@ describe('Teste',()=>{
     it('',()=>
     {     
         CSVA=processData(CSV);
+        console.log(CSVA)
+
+        CSVA.forEach(element => {
+            let caixa = element[0].split(":")
+            let saldo = element[1].split(":")
+            let valor = element[2].split(":")
+            let tipo = element[3].split(":")
+            let motivo = element[4].split(":")
+            let resultado  = element[5].split(":")
+
+            // caixa aberto
+            if(caixa[1] === "VERDADEIRO")
+                cy.get('input[name=caixa_fechamento]').should("have.value", "")
+            
+            if(tipo[1] === "Sangria") {
+                cy.get('select[name=tipo]').select(tipo[1])
+                cy.get('input[name=valor]').type(parseFloat(valor[1]))
+                // expect(parseFloat(valor[1])).to.be.lessThan(parseFloat(saldo[1]))
+
+                cy.get('textarea').type(motivo[1])
+                assert.isNotEmpty('textarea', 'vazio')
+            }
+        });
+
         // caixa aberto
         cy.get('input[name=caixa_fechamento]').should("have.value", "")
 
