@@ -16,6 +16,9 @@
     "pg": "^8.5.1"
   },
   "devDependencies": {
-    "cypress": "^7.1.0"
+    "convert-csv-to-json": "^1.3.0",
+    "csv-parser": "^3.0.0",
+    "cypress": "^7.1.0",
+    "nodemon": "^2.0.7"
   }
 }

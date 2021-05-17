@@ -28,16 +28,45 @@ beforeEach(()=> cy.visit('/'))
 
 // cypress test using fixtures
 
+function processData(allText) {
+    var allTextLines = allText.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+
+    for (var i=1; i<allTextLines.length; i++) 
+    {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) 
+        {
+            var tarr = [];
+            for (var j=0; j<headers.length; j++) 
+            {
+                tarr.push(headers[j]+":"+data[j]);
+            }
+            //alert(tarr);
+            lines.push(tarr);
+        }
+    } 
+    return lines;
+}
+
 describe('Teste',()=>{
 
-    before(()=>{
-        cy.fixture('teste.csv').then(function (teste) {
-            this.teste = teste
+    let CSV;
+    let CSVA=[];
+    beforeEach(()=>{
+        cy.fixture('teste.csv').then(
+        (Exemplo)=>
+        {
+            cy.intercept('GET','/teste.csv',Exemplo);
+            CSV=Exemplo;
         })
+        
     })
 
-    it('',()=>{
-        
+    it('',()=>
+    {     
+        CSVA=processData(CSV);
         // caixa aberto
         cy.get('input[name=caixa_fechamento]').should("have.value", "")
 
