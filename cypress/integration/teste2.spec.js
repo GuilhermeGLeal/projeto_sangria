@@ -56,10 +56,16 @@ describe('Teste',()=>{
                 cy.get('input[name=caixa_fechamento]').should("have.value", "")
             
             if(tipo[1] === "Sangria") {
+                // selecionaro o tipo da transação
                 cy.get('select[name=tipo]').select(tipo[1])
+
+                // escrever o 'valor' no devido campo
                 cy.get('input[name=valor]').type(parseFloat(valor[1]))
+
+                // sangria
                 // expect(parseFloat(valor[1])).to.be.lessThan(parseFloat(saldo[1]))
 
+                // verificar o motivo
                 cy.get('textarea').type(motivo[1])
                 assert.isNotEmpty('textarea', 'vazio')
             }
