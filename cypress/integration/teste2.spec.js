@@ -54,28 +54,32 @@ describe('Teste',()=>{
             // caixa aberto
             if(caixa[1] === "VERDADEIRO")
                 cy.get('input[name=caixa_fechamento]').should("have.value", "")
+
+            // selecionar o tipo da transação
+            cy.get('select[name=tipo]').select(tipo[1])
+
+            // verificar o motivo
+            cy.get('textarea').type(motivo[1]).clear()
+            // assert.isNotEmpty('textarea', 'vazio')
+
+            // escrever o 'valor' no devido campo
+            cy.get('input[name=valor]').type(parseFloat(valor[1])).clear()
+
+            // escrever o 'saldo' no devido campo
+            cy.get('input[name=caixa_valorfinal]').type(parseFloat(saldo[1])).clear()
             
             if(tipo[1] === "Sangria") {
-                // selecionaro o tipo da transação
-                cy.get('select[name=tipo]').select(tipo[1])
+                // sangria 1
+                // assert.isAtMost(
+                //     parseFloat(valor[1]),
+                //     parseFloat(saldo[1]),
+                //     'Valor da Sangria não pode ser maior que o Saldo Atual do caixa'
+                // )
 
-                // escrever o 'valor' no devido campo
-                cy.get('input[name=valor]').type(parseFloat(valor[1]))
-
-                // sangria
-                // expect(parseFloat(valor[1])).to.be.lessThan(parseFloat(saldo[1]))
-
-                // verificar o motivo
-                cy.get('textarea').type(motivo[1])
-                assert.isNotEmpty('textarea', 'vazio')
+                // sangria 2
+                // cy.get('input[name=caixa_valorfinal]')
+                // expect(parseFloat(saldo[1])).to.be.greaterThan(parseFloat(valor[1]))
             }
         });
-
-        // caixa aberto
-        cy.get('input[name=caixa_fechamento]').should("have.value", "")
-
-        // sangria
-        cy.get('input[name=caixa_valorfinal]')
-        expect(1500).to.be.greaterThan(0)
     })
 })
