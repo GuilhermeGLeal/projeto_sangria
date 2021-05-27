@@ -51,11 +51,13 @@ describe('Teste',()=>{
             // caixa aberto
             if(caixa[1] === "VERDADEIRO")
                 cy.get('input[name=caixa_fechamento]').should("have.value", "")
+            else
+                cy.log("Erro: Caixaa fechado!")
     
             // selecionar o tipo da transação
             cy.get('select[name=tipo]').select(tipo[1])
     
-            // verificar o motivo
+            // escrever o motivo
             cy.get('textarea').type(motivo[1])
             // assert.isNotEmpty('textarea', 'vazio')
     
@@ -66,20 +68,26 @@ describe('Teste',()=>{
             cy.get('input[name=caixa_valorfinal]').type(saldo[1])
     
             // verificar valor nulo
-            expect(saldo[1]).to.not.equal("-")
+            if(saldo[1] != "-")
+                expect(saldo[1]).to.not.equal("-")
+            else
+                cy.log("Erro: é preciso informar o saldo!")
+
+            if(motivo[1] != "-")
+                expect(motivo[1]).to.not.equal("-")
+            else
+                cy.log("Erro: é preciso informar o motivo!")
             
-            if(tipo[1] === "Sangria") {
+            if(tipo[1] === "Sangria" && parseFloat(valor[1] < parseFloat(saldo[1]))) {
                 // sangria 1
-                // assert.isAtMost(
-                //     parseFloat(valor[1]),
-                //     parseFloat(saldo[1]),
-                //     'Valor da Sangria não pode ser maior que o Saldo Atual do caixa'
-                // )
-    
-                // sangria 2
-                // cy.get('input[name=caixa_valorfinal]')
-                // expect(parseFloat(saldo[1])).to.be.greaterThan(parseFloat(valor[1]))
+                assert.isAtMost(
+                    parseFloat(valor[1]),
+                    parseFloat(saldo[1]),
+                    'Valor da Sangria não pode ser maior que o Saldo Atual do caixa'
+                )
             }
+            else
+                cy.log("Erro: o valor deve ser maior que o saldo!")
 
             // limpar campos após testes
             cy.get('textarea').clear()
